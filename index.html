@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sedulous - Best Free Bootstrap Template</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+    body{background:black;font-size:28px;color:#555;}
+    #haslo{letter-spacing:5px;}
+    .klaw-char{float:left;border:solid 3px #555;padding:9px;margin:12px;width:60px;height:60px; text-align:center; border-radius: 9px;}
+    .klaw-char:hover{color:yellow;border-color:yellow;cursor:pointer;}
+    .klaw-char.lit-green{color:green;border-color:green;cursor:default;}
+    .klaw-char.lit-red{color:red;border-color:red;cursor:default;}
+</style>
+  </head>
+  <body>
+
+   
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+            <br />
+            <div id="haslo"></div>
+        </div>    
+    </div>
+    <div class="row">
+       <div class="col-md-12 col-sm-12 col-xs-12"> 
+        <div class="alldesc">
+            <div class="col-md-6 col-sm-6 col-xs-12">                
+          </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <br /><br />
+                <div id="klawiatura"></div>
+          </div>
+          </div>
+      </div>
+      
+        </div>
+</div>
+ 
+
+<script>
+String.prototype.replaceAt=function(index, char) {
+    if (index > this.helgth - 1) return this.toString();
+    else {
+        return this.substr(0, index) + char + this.substr(index+1);
+    } 
+}
+
+    var haslo = "Programowanie jest bardzo proste",
+        alfabet = "AĄBCĆDEĘFGHIJKLŁMNOÓPQRSTUVWXYZŻŹ",
+        hl = haslo.length,
+        kl = alfabet.length,
+        nh = "",
+        nk = "",
+        aktualne = "",        
+        checkedLetter = false,
+        error = 0,
+        vh = $("#haslo"),
+        vk = $("#klawiatura"),
+        haslo = haslo.toUpperCase();        
+        
+    for (i=0;i<hl;i++){
+        if (haslo.charAt(i)==" ") nh = nh + " ";
+        else nh = nh + "_";
+    }
+
+    for (i=0;i<kl;i++){
+        nk += '<div class="klaw-char">'+alfabet.charAt(i)+'</div>';
+    }
+    
+    vh.html(nh);
+    vk.html(nk);
+     
+    $(".klaw-char").click(function(){
+        clickLetter = $(this).html();
+        checkedLetter = false;
+       aktualne = nh;
+        
+        for (i=0;i<hl;i++){
+            if (clickLetter == haslo.charAt(i)) {
+                aktualne = aktualne.replaceAt(i,clickLetter);
+                checkedLetter = true;
+            }            
+        }
+
+        if (checkedLetter==true) {
+            $(this).addClass('lit-green');
+        }
+        else {
+            $(this).addClass('lit-red');            
+        }
+        $(this).off( "click" );
+        
+        vh.html(aktualne);
+        nh = aktualne;
+    });
+           
+</script>
+
+<script src="js/bootstrap.min.js"></script> 
+
+</body>
+</html>
